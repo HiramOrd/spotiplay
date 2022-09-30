@@ -1,0 +1,1 @@
+class UcNullDataException implements Exception {}
