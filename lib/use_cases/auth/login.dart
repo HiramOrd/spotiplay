@@ -12,9 +12,8 @@ class UcAuthLogin {
     this._repositoryLocal,
   );
 
-  Future<String> login() async {
+  Future<String> excecute() async {
     final response = await _repositoryAuth.login();
-
     final tokenRx = RegExp(r"(?<=#access_token=)(.*)(?=&token_type)");
     final token = tokenRx.stringMatch(response);
 
@@ -22,6 +21,6 @@ class UcAuthLogin {
 
     await _repositoryLocal.saveLogin(token);
     DioClient.token = token;
-    return response;
+    return token;
   }
 }

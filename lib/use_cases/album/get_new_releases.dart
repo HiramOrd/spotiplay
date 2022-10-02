@@ -8,7 +8,7 @@ class UcAlbumGetNewReleases {
     this._repositoryMusic,
   );
 
-  Future<AlbumList?> execute() async {
+  Future<AlbumList> execute() async {
     final albums = await _repositoryMusic.getNewReleases();
     return albums;
   }

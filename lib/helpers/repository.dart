@@ -1,10 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:spotiplay/core/exceptions/repository.dart';
 
 class HelperRepository {
-  static void isValidResponse(Response data) {
-    if (data.statusCode != null) {
-      if (data.statusCode! < 200 || data.statusCode! > 299) {
+  static void isValidResponse(int? statusCode) {
+    if (statusCode != null) {
+      if (statusCode < 200 || statusCode > 299) {
         throw RepositoryServerException();
       }
       return;
