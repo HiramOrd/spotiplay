@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/use_cases/auth/validate_token.dart';
 
@@ -9,7 +10,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   SplashBloc({
     required this.ucValidateToken,
-  }) : super(SplashState.initial()) {
+  }) : super(const SplashState.initial()) {
     on<EventSplashValidateToken>(validateToken);
   }
 

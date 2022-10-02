@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/app/helpers/error.dart';
 import 'package:spotiplay/models/album_list.dart';
@@ -14,7 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required this.ucLogout,
     required this.ucGetNewReleases,
-  }) : super(HomeState.initial()) {
+  }) : super(const HomeState.initial()) {
     on<EventHomeInit>(init);
     on<EventHomeLogout>(logout);
   }

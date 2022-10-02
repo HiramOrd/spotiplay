@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/use_cases/auth/login.dart';
@@ -10,7 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc({
     required this.ucLogin,
-  }) : super(LoginState.initial()) {
+  }) : super(const LoginState.initial()) {
     on<EventLoginRegister>(register);
   }
 
@@ -18,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
 
     try {
-      await ucLogin.login();
+      await ucLogin.excecute();
       emit(state.copyWith(status: LoginStatus.authenticated));
     } catch (e) {
       if (e.runtimeType == PlatformException) {

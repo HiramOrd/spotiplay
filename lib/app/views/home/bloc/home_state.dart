@@ -2,18 +2,18 @@ part of 'home_bloc.dart';
 
 enum HomeStatus { initial, loading, info, logout }
 
-class HomeState {
+class HomeState extends Equatable {
   final HomeStatus status;
   final String? info;
   final AlbumList? albumList;
 
-  HomeState({
+  const HomeState({
     required this.status,
     this.info,
     this.albumList,
   });
 
-  HomeState.initial() : this(status: HomeStatus.initial);
+  const HomeState.initial() : this(status: HomeStatus.initial);
 
   HomeState copyWith({
     HomeStatus? status,
@@ -26,4 +26,7 @@ class HomeState {
       albumList: albumList ?? this.albumList,
     );
   }
+
+  @override
+  List<Object?> get props => [albumList, info, status];
 }

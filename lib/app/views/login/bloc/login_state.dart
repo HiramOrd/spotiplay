@@ -2,16 +2,16 @@ part of 'login_bloc.dart';
 
 enum LoginStatus { initial, loading, info, unAuthenticated, authenticated }
 
-class LoginState {
+class LoginState extends Equatable {
   final LoginStatus status;
   final String? info;
 
-  LoginState({
+  const LoginState({
     required this.status,
     this.info,
   });
 
-  LoginState.initial() : this(status: LoginStatus.initial);
+  const LoginState.initial() : this(status: LoginStatus.initial);
 
   LoginState copyWith({
     LoginStatus? status,
@@ -22,4 +22,7 @@ class LoginState {
       info: info,
     );
   }
+
+  @override
+  List<Object?> get props => [info, status];
 }
