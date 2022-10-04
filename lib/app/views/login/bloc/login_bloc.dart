@@ -27,8 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         if (error.code == "CANCELED") {
           emit(state.copyWith(
-            status: LoginStatus.info,
-            info: "Proceso cancelado",
+            status: LoginStatus.initial,
           ));
           return;
         }

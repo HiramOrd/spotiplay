@@ -11,10 +11,12 @@ class Injector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InjectionRepository(
-      child: InjectionUseCases(
-        child: InjectionBlocs(
-          child: child,
+    return InjectionHelpers(
+      child: InjectionRepository(
+        child: InjectionUseCases(
+          child: InjectionBlocs(
+            child: child,
+          ),
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HelperForm {
   // Validate not null input
   static String? notNull(BuildContext context, String? text) {
-    return text?.isEmpty == true ? 'Campo obligatorio' : null;
+    return text?.isNotEmpty == true ? null : 'Campo obligatorio';
   }
 
   static String? password(BuildContext context, String? text) {

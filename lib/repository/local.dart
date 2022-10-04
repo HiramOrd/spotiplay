@@ -13,7 +13,7 @@ class RepositoryLocalImpl extends RepositoryLocal {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-    return token!;
+    return token;
   }
 
   @override

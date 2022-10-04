@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'info.dart';
 import 'loading.dart';
 
@@ -8,7 +9,8 @@ class HelperViewInfo {
     required bool loading,
     String? infoData,
   }) {
-    (loading) ? HelperLoading().show(context) : HelperLoading().hide();
+    final helperLoading = context.read<HelperLoading>();
+    (loading) ? helperLoading.show(context) : helperLoading.hide();
 
     if (infoData?.isNotEmpty == true) {
       HelperInfo.showSnackbar(context, '$infoData');

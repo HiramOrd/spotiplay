@@ -9,10 +9,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<HomeBloc>().state;
-    final albumList = state.albumList;
-
-    print(albumList?.toMap());
+    // final state = context.watch<HomeBloc>().state;
+    // final albumList = state.albumList;
 
     return Scaffold(
       backgroundColor: Style.BLACK,

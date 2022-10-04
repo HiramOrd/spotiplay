@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotiplay/app/helpers/loading.dart';
 import 'package:spotiplay/app/helpers/view_info.dart';
 import 'package:spotiplay/app/routes/index.dart';
 import 'bloc/home_bloc.dart';
@@ -20,12 +19,6 @@ class _HomeListenerState extends State<HomeListener> {
 
     final homeBloc = context.read<HomeBloc>();
     homeBloc.add(EventHomeInit());
-  }
-
-  @override
-  void dispose() {
-    HelperLoading().hide();
-    super.dispose();
   }
 
   @override

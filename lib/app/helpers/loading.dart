@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HelperLoading {
-  factory HelperLoading() => _singleton;
-  HelperLoading._internal();
-  static final HelperLoading _singleton = HelperLoading._internal();
-
   OverlayEntry? _overlay;
+  get overlay => _overlay;
 
   void show(BuildContext context) {
     if (_overlay == null) {
