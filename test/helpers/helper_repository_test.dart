@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:spotiplay/core/exceptions/repository.dart';
+import 'package:spotiplay/models/exceptions/repository.dart';
 import 'package:spotiplay/helpers/repository.dart';
 
 void main() {

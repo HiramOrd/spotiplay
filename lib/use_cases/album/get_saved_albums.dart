@@ -4,30 +4,24 @@ import 'package:spotiplay/models/repository/music.dart';
 
 class UcAlbumGetSavedAlbums {
   final RepositoryMusic _repositoryMusic;
+  UcAlbumGetSavedAlbums(this._repositoryMusic);
 
-  SpotifyList<AlbumSaved>? savedAlbums;
-  bool next = true;
+  Future<SpotifyList<AlbumSaved>?> execute({
+    int? paginationIndex,
+    SpotifyList<AlbumSaved>? prevAlbumsSaved,
+  }) async {
+    if (prevAlbumsSaved?.next?.isEmpty == true) return prevAlbumsSaved;
 
-  UcAlbumGetSavedAlbums(
-    this._repositoryMusic,
-  ) {
-    savedAlbums = SpotifyList<AlbumSaved>();
-  }
+    final albumsSaved = await _repositoryMusic.getSavedAlbums(
+      paginationIndex ?? 0,
+    );
 
-  Future<SpotifyList<AlbumSaved>?> execute([int? index]) async {
-    if (next == false) return savedAlbums;
-
-    final response = await _repositoryMusic.getSavedAlbums(index ?? 0);
-
-    final items = [
-      ...(savedAlbums?.items ?? <AlbumSaved>[]),
-      ...(response.items ?? <AlbumSaved>[]),
+    final nextAlbumsSaved = albumsSaved;
+    nextAlbumsSaved.items = [
+      ...(prevAlbumsSaved?.items ?? <AlbumSaved>[]),
+      ...(albumsSaved.items ?? <AlbumSaved>[]),
     ];
 
-    savedAlbums = response;
-    savedAlbums?.items = items;
-
-    if (savedAlbums?.next?.isEmpty ?? true) next = false;
-    return savedAlbums;
+    return nextAlbumsSaved;
   }
 }

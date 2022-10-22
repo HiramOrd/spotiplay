@@ -4,30 +4,24 @@ import 'package:spotiplay/models/repository/music.dart';
 
 class UcAlbumGetNewReleases {
   final RepositoryMusic _repositoryMusic;
+  UcAlbumGetNewReleases(this._repositoryMusic);
 
-  SpotifyList<Album>? newReleases;
-  bool next = true;
+  Future<SpotifyList<Album>?> execute({
+    int? paginationIndex,
+    SpotifyList<Album>? prevNewReleases,
+  }) async {
+    if (prevNewReleases?.next?.isEmpty == true) return prevNewReleases;
 
-  UcAlbumGetNewReleases(
-    this._repositoryMusic,
-  ) {
-    newReleases = SpotifyList<Album>();
-  }
+    final newReleases = await _repositoryMusic.getNewReleases(
+      paginationIndex ?? 0,
+    );
 
-  Future<SpotifyList<Album>?> execute([int? index]) async {
-    if (next == false) return newReleases;
-
-    final response = await _repositoryMusic.getNewReleases(index ?? 0);
-
-    final items = [
-      ...(newReleases?.items ?? <Album>[]),
-      ...(response.items ?? <Album>[]),
+    final nextNewReleases = newReleases;
+    nextNewReleases.items = [
+      ...(prevNewReleases?.items ?? <Album>[]),
+      ...(newReleases.items ?? <Album>[]),
     ];
 
-    newReleases = response;
-    newReleases?.items = items;
-
-    if (newReleases?.next?.isEmpty ?? true) next = false;
-    return newReleases;
+    return nextNewReleases;
   }
 }

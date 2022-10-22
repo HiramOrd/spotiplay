@@ -14,15 +14,20 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  late final AnimationController _savedAlbumsAnimCtr = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 600),
-  );
+  late final List<AnimationController> _savedAlbumsAnimCtr;
 
-  late final AnimationController _newReleasesAnimCtr = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 600),
-  );
+  @override
+  void initState() {
+    super.initState();
+
+    _savedAlbumsAnimCtr = List.generate(
+      3,
+      (_) => AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 600),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +37,33 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // relatedArtist carousel
+          if (state.relatedArtist?.isNotEmpty == true)
+            AnimationFadeTraslate(
+              controller: _savedAlbumsAnimCtr[2],
+              initialAnimation: true,
+              initialAnimationTimeOut: const Duration(milliseconds: 400),
+              child: const Section(
+                title: "Related Artist",
+                child: CarouselRelatedArtist(),
+              ),
+            ),
+
+          // savedAlbums carousel
           if (state.savedAlbums?.items?.isNotEmpty == true)
             AnimationFadeTraslate(
-              controller: _savedAlbumsAnimCtr,
+              controller: _savedAlbumsAnimCtr[0],
               initialAnimation: true,
               child: const Section(
                 title: "Saved Albums",
                 child: CarouselSavedAlbums(),
               ),
             ),
+
+          // newReleases carousel
           if (state.newReleases?.items?.isNotEmpty == true)
             AnimationFadeTraslate(
-              controller: _newReleasesAnimCtr,
+              controller: _savedAlbumsAnimCtr[1],
               initialAnimation: true,
               initialAnimationTimeOut: const Duration(milliseconds: 200),
               child: const Section(
@@ -51,13 +71,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 child: CarouselNewReleases(),
               ),
             ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     final homeBloc = context.read<HomeBloc>();
-          //     homeBloc.add(EventHomeLogout());
-          //   },
-          //   child: const Text('Logout'),
-          // ),
+
+          // Logout
+          ElevatedButton(
+            onPressed: () {
+              final homeBloc = context.read<HomeBloc>();
+              homeBloc.add(EventHomeLogout());
+            },
+            child: const Text('Logout'),
+          ),
         ],
       ),
     );

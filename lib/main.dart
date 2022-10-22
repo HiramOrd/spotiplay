@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotiplay/core/environment.dart';
+import 'package:spotiplay/app/core/environment.dart';
 import 'package:spotiplay/app/main.dart';
 
 void main() {

@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spotiplay/core/environment.dart';
+import 'package:spotiplay/app/core/environment.dart';
 
+// TODO: Delete singletone
 class DioClient {
   factory DioClient() => _singleton;
   static final DioClient _singleton = DioClient._internal();

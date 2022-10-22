@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotiplay/app/routes/index.dart';
-import 'package:spotiplay/core/style.dart';
+import 'package:spotiplay/app/core/style.dart';
 
 class AppMaterial extends StatelessWidget {
   const AppMaterial({Key? key}) : super(key: key);

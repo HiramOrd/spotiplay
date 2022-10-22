@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/app/views/index.dart';
 import 'package:spotiplay/use_cases/album/index.dart';
+import 'package:spotiplay/use_cases/artist/get_related_artist.dart';
 import 'package:spotiplay/use_cases/auth/index.dart';
 
 class InjectionBlocs extends StatelessWidget {
@@ -14,6 +15,7 @@ class InjectionBlocs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ucArtistGetRelatedArtist = context.read<UcArtistGetRelatedArtist>();
     final ucAlbumGetSavedAlbums = context.read<UcAlbumGetSavedAlbums>();
     final ucAlbumGetNewReleases = context.read<UcAlbumGetNewReleases>();
     final uCLogin = context.read<UcAuthLogin>();
@@ -37,6 +39,7 @@ class InjectionBlocs extends StatelessWidget {
             ucLogout: uCLogout,
             ucGetNewReleases: ucAlbumGetNewReleases,
             ucAlbumGetSavedAlbums: ucAlbumGetSavedAlbums,
+            ucArtistGetRelatedArtist: ucArtistGetRelatedArtist,
           ),
         ),
       ],

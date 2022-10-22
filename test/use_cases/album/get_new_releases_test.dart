@@ -12,11 +12,11 @@ import 'get_new_releases_test.mocks.dart';
 void main() {
   group("Use case - Get new releases", () {
     late MockRepositoryMusic mockRepositoryMusic;
-    late UcAlbumGetSavedAlbums getNewReleases;
+    late UcAlbumGetNewReleases getNewReleases;
 
     setUp(() {
       mockRepositoryMusic = MockRepositoryMusic();
-      getNewReleases = UcAlbumGetSavedAlbums(mockRepositoryMusic);
+      getNewReleases = UcAlbumGetNewReleases(mockRepositoryMusic);
     });
 
     tearDown(() {});
@@ -27,6 +27,31 @@ void main() {
 
       final response = await getNewReleases.execute();
       expect(response, isA<SpotifyList<Album>>());
+    });
+
+    test("Return album list with data", () async {
+      // Initial Value
+      final prevNewReleases = SpotifyList(
+        next: "with next value",
+        items: [Album(), Album(), Album()],
+      );
+
+      // Value from DB
+      final nextNewReleases = SpotifyList(
+        next: null,
+        items: [Album()],
+      );
+
+      when(mockRepositoryMusic.getNewReleases(1))
+          .thenAnswer((_) async => nextNewReleases);
+
+      final response = await getNewReleases.execute(
+        paginationIndex: 1,
+        prevNewReleases: prevNewReleases,
+      );
+
+      expect(response?.items?.length, 4);
+      expect(response?.next, null);
     });
   });
 }

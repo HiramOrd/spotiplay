@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotiplay/core/environment.dart';
+import 'package:spotiplay/app/core/environment.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/repository/index.dart';
 import 'package:spotiplay/temp/repository/index.dart';
@@ -46,6 +46,9 @@ class InjectionRepository extends StatelessWidget {
       RepositoryProvider<RepositoryMusic>(
         create: (context) => RepositoryMusicImpl(),
       ),
+      RepositoryProvider<RepositoryArtist>(
+        create: (context) => RepositoryArtistImpl(),
+      ),
     ];
   }
 
@@ -59,6 +62,9 @@ class InjectionRepository extends StatelessWidget {
       ),
       RepositoryProvider<RepositoryMusic>(
         create: (context) => RepositoryMusicTemp(),
+      ),
+      RepositoryProvider<RepositoryArtist>(
+        create: (context) => RepositoryArtistTemp(),
       ),
     ];
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spotiplay/app/widgets/cover/image.dart';
-import 'package:spotiplay/core/style.dart';
+import 'package:spotiplay/app/widgets/image_button.dart';
+import 'package:spotiplay/app/core/style.dart';
 
 class Cover extends StatelessWidget {
   const Cover({
@@ -17,7 +17,7 @@ class Cover extends StatelessWidget {
   final double labelHeight;
   final String title;
   final String? subtitle;
-  final CoverImageBase image;
+  final Widget image;
   final Function() onTap;
 
   @override
@@ -27,18 +27,9 @@ class Cover extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              image,
-              Positioned.fill(
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onTap,
-                  ),
-                ),
-              ),
-            ],
+          ImageButton(
+            image: image,
+            onTap: onTap,
           ),
           const SizedBox(height: Style.PADDING),
           Text(

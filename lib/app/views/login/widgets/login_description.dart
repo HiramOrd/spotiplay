@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotiplay/core/style.dart';
+import 'package:spotiplay/app/core/style.dart';
 import 'package:spotiplay/app/widgets/logo.dart';
 
 class LoginDescription extends StatelessWidget {

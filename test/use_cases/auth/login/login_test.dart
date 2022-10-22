@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:spotiplay/core/exceptions/use_cases.dart';
+import 'package:spotiplay/models/exceptions/use_cases.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/use_cases/auth/index.dart';
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/use_cases/album/index.dart';
+import 'package:spotiplay/use_cases/artist/get_related_artist.dart';
 import 'package:spotiplay/use_cases/auth/index.dart';
 
 class InjectionUseCases extends StatelessWidget {
@@ -17,9 +18,13 @@ class InjectionUseCases extends StatelessWidget {
     final repositoryLocal = context.read<RepositoryLocal>();
     final repositoryAuth = context.read<RepositoryAuth>();
     final repositoryMusic = context.read<RepositoryMusic>();
+    final repositoryArtist = context.read<RepositoryArtist>();
 
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(
+          create: (context) => UcArtistGetRelatedArtist(repositoryArtist),
+        ),
         RepositoryProvider(
           create: (context) => UcAlbumGetNewReleases(
             repositoryMusic,

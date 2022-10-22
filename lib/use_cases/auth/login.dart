@@ -1,7 +1,6 @@
-import 'package:spotiplay/core/exceptions/use_cases.dart';
+import 'package:spotiplay/models/exceptions/use_cases.dart';
 import 'package:spotiplay/models/repository/auth.dart';
 import 'package:spotiplay/models/repository/local.dart';
-import 'package:spotiplay/core/dio.dart';
 
 class UcAuthLogin {
   final RepositoryAuth _repositoryAuth;
@@ -18,9 +17,8 @@ class UcAuthLogin {
     final token = tokenRx.stringMatch(response);
 
     if (token == null) throw UcNullDataException();
-    // print(token);
+    print(token);
     await _repositoryLocal.saveLogin(token);
-    DioClient.token = token;
     return token;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotiplay/app/core/dio.dart';
 import 'package:spotiplay/use_cases/auth/login.dart';
 
 part 'login_event.dart';
@@ -19,7 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
 
     try {
-      await ucLogin.excecute();
+      final token = await ucLogin.excecute();
+      DioClient.token = token;
       emit(state.copyWith(status: LoginStatus.authenticated));
     } catch (e) {
       if (e.runtimeType == PlatformException) {

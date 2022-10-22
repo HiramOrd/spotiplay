@@ -1,11 +1,12 @@
-import 'package:spotiplay/core/exceptions/repository.dart';
+import 'package:spotiplay/models/exceptions/repository.dart';
 import 'package:spotiplay/helpers/repository.dart';
 import 'package:spotiplay/models/album.dart';
 import 'package:spotiplay/models/spotify_list.dart';
 import 'package:spotiplay/models/album_saved.dart';
 import 'package:spotiplay/models/repository/music.dart';
-import 'package:spotiplay/core/dio.dart';
+import 'package:spotiplay/app/core/dio.dart';
 
+// TODO: Delete app dependency
 class RepositoryMusicImpl extends RepositoryMusic {
   @override
   Future<SpotifyList<Album>> getNewReleases(int index) async {

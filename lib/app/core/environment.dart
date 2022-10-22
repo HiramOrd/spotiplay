@@ -7,6 +7,7 @@ abstract class ENV_CONFIG {
   String get api;
 }
 
+// TODO: Delete singletone
 // Environment configs
 class Environment {
   factory Environment() => _singleton;

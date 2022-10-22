@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spotiplay/app/helpers/image.dart';
-import 'package:spotiplay/core/style.dart';
+import 'package:spotiplay/app/core/style.dart';
 
-class CoverImageBase extends StatelessWidget {
-  const CoverImageBase({super.key});
-
-  @override
-  Widget build(BuildContext context) => Container();
-}
-
-class CoverImage extends StatelessWidget implements CoverImageBase {
+class CoverImage extends StatelessWidget {
   const CoverImage({
     Key? key,
     this.aspectRatio = 1 / 1,

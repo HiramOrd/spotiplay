@@ -1,4 +1,4 @@
-import 'package:spotiplay/core/exceptions/repository.dart';
+import 'package:spotiplay/models/exceptions/repository.dart';
 
 class HelperRepository {
   static void isValidResponse(int? statusCode) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotiplay/core/style.dart';
+import 'package:spotiplay/app/core/style.dart';
 import '../bloc/login_bloc.dart';
 
 class LoginSubmitButton extends StatelessWidget {
