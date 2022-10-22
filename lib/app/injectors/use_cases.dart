@@ -26,6 +26,11 @@ class InjectionUseCases extends StatelessWidget {
           ),
         ),
         RepositoryProvider(
+          create: (context) => UcAlbumGetSavedAlbums(
+            repositoryMusic,
+          ),
+        ),
+        RepositoryProvider(
           create: (context) => UcAuthLogin(
             repositoryAuth,
             repositoryLocal,

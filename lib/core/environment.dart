@@ -40,5 +40,5 @@ class ProdConfig implements ENV_CONFIG {
   @override
   ENV_MODE get type => ENV_MODE.PROD;
   @override
-  String get api => 'https://api.spotify.com/v1/browse';
+  String get api => 'https://api.spotify.com/v1';
 }

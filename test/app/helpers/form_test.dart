@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:spotiplay/app/helpers/form.dart';
 
-import 'mocks/context_test.mocks.dart';
+import 'form_test.mocks.dart';
 
 @GenerateMocks([BuildContext])
 void main() {

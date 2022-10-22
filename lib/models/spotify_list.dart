@@ -1,7 +1,5 @@
-import 'album.dart';
-
-class AlbumList {
-  AlbumList({
+class SpotifyList<T> {
+  SpotifyList({
     this.href,
     this.items,
     this.limit,
@@ -12,18 +10,17 @@ class AlbumList {
   });
 
   String? href;
-  List<Album>? items;
+  List<T>? items;
   int? limit;
   String? next;
   int? offset;
   String? previous;
   int? total;
 
-  factory AlbumList.fromMap(Map<String, dynamic> json) => AlbumList(
+  factory SpotifyList.fromMap(Map<String, dynamic> json, [List<T>? items]) =>
+      SpotifyList(
         href: json["href"],
-        items: json["items"] == null
-            ? null
-            : List<Album>.from(json["items"].map((x) => Album.fromMap(x))),
+        items: items,
         limit: json["limit"],
         next: json["next"],
         offset: json["offset"],
@@ -31,11 +28,9 @@ class AlbumList {
         total: json["total"],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap([Map? items]) => {
         "href": href,
-        "items": items == null
-            ? null
-            : List<dynamic>.from(items!.map((x) => x.toMap())),
+        "items": items,
         "limit": limit,
         "next": next,
         "offset": offset,

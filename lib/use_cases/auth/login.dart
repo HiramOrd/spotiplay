@@ -18,7 +18,7 @@ class UcAuthLogin {
     final token = tokenRx.stringMatch(response);
 
     if (token == null) throw UcNullDataException();
-
+    // print(token);
     await _repositoryLocal.saveLogin(token);
     DioClient.token = token;
     return token;

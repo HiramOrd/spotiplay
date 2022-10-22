@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/core/environment.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/repository/index.dart';
+import 'package:spotiplay/temp/repository/index.dart';
 
 class InjectionRepository extends StatelessWidget {
   const InjectionRepository({
@@ -17,6 +18,9 @@ class InjectionRepository extends StatelessWidget {
     List<RepositoryProvider> providers = [];
 
     switch (Environment().config.type) {
+      case ENV_MODE.DEV:
+        providers = getProvidersTemp(context);
+        break;
       case ENV_MODE.PROD:
         providers = getProvidersProductive(context);
         break;
@@ -41,6 +45,20 @@ class InjectionRepository extends StatelessWidget {
       ),
       RepositoryProvider<RepositoryMusic>(
         create: (context) => RepositoryMusicImpl(),
+      ),
+    ];
+  }
+
+  static List<RepositoryProvider> getProvidersTemp(BuildContext context) {
+    return [
+      RepositoryProvider<RepositoryAuth>(
+        create: (context) => RepositoryAuthTemp(),
+      ),
+      RepositoryProvider<RepositoryLocal>(
+        create: (context) => RepositoryLocalImpl(),
+      ),
+      RepositoryProvider<RepositoryMusic>(
+        create: (context) => RepositoryMusicTemp(),
       ),
     ];
   }

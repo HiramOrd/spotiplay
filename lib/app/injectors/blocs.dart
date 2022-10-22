@@ -14,7 +14,8 @@ class InjectionBlocs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uCGetNewReleases = context.read<UcAlbumGetNewReleases>();
+    final ucAlbumGetSavedAlbums = context.read<UcAlbumGetSavedAlbums>();
+    final ucAlbumGetNewReleases = context.read<UcAlbumGetNewReleases>();
     final uCLogin = context.read<UcAuthLogin>();
     final uCLogout = context.read<UcAuthLogout>();
     final uCValidateToken = context.read<UcAuthValidateToken>();
@@ -34,7 +35,8 @@ class InjectionBlocs extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeBloc(
             ucLogout: uCLogout,
-            ucGetNewReleases: uCGetNewReleases,
+            ucGetNewReleases: ucAlbumGetNewReleases,
+            ucAlbumGetSavedAlbums: ucAlbumGetSavedAlbums,
           ),
         ),
       ],

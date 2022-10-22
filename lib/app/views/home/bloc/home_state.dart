@@ -5,12 +5,14 @@ enum HomeStatus { initial, loading, info, logout }
 class HomeState extends Equatable {
   final HomeStatus status;
   final String? info;
-  final AlbumList? albumList;
+  final SpotifyList<AlbumSaved>? savedAlbums;
+  final SpotifyList<Album>? newReleases;
 
   const HomeState({
     required this.status,
     this.info,
-    this.albumList,
+    this.savedAlbums,
+    this.newReleases,
   });
 
   const HomeState.initial() : this(status: HomeStatus.initial);
@@ -18,15 +20,17 @@ class HomeState extends Equatable {
   HomeState copyWith({
     HomeStatus? status,
     String? info,
-    AlbumList? albumList,
+    SpotifyList<AlbumSaved>? savedAlbums,
+    SpotifyList<Album>? newReleases,
   }) {
     return HomeState(
       status: status ?? this.status,
+      savedAlbums: savedAlbums ?? this.savedAlbums,
+      newReleases: newReleases ?? this.newReleases,
       info: info,
-      albumList: albumList ?? this.albumList,
     );
   }
 
   @override
-  List<Object?> get props => [albumList, info, status];
+  List<Object?> get props => [newReleases, savedAlbums, info, status];
 }

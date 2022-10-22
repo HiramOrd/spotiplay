@@ -6,8 +6,10 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:spotiplay/models/album_list.dart' as _i2;
+import 'package:spotiplay/models/album.dart' as _i5;
+import 'package:spotiplay/models/album_saved.dart' as _i6;
 import 'package:spotiplay/models/repository/music.dart' as _i3;
+import 'package:spotiplay/models/spotify_list.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,8 +22,9 @@ import 'package:spotiplay/models/repository/music.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAlbumList_0 extends _i1.SmartFake implements _i2.AlbumList {
-  _FakeAlbumList_0(
+class _FakeSpotifyList_0<T> extends _i1.SmartFake
+    implements _i2.SpotifyList<T> {
+  _FakeSpotifyList_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,17 +42,35 @@ class MockRepositoryMusic extends _i1.Mock implements _i3.RepositoryMusic {
   }
 
   @override
-  _i4.Future<_i2.AlbumList> getNewReleases() => (super.noSuchMethod(
+  _i4.Future<_i2.SpotifyList<_i5.Album>> getNewReleases(int? index) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getNewReleases,
-          [],
+          [index],
         ),
-        returnValue: _i4.Future<_i2.AlbumList>.value(_FakeAlbumList_0(
+        returnValue: _i4.Future<_i2.SpotifyList<_i5.Album>>.value(
+            _FakeSpotifyList_0<_i5.Album>(
           this,
           Invocation.method(
             #getNewReleases,
-            [],
+            [index],
           ),
         )),
-      ) as _i4.Future<_i2.AlbumList>);
+      ) as _i4.Future<_i2.SpotifyList<_i5.Album>>);
+  @override
+  _i4.Future<_i2.SpotifyList<_i6.AlbumSaved>> getSavedAlbums(int? index) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getSavedAlbums,
+          [index],
+        ),
+        returnValue: _i4.Future<_i2.SpotifyList<_i6.AlbumSaved>>.value(
+            _FakeSpotifyList_0<_i6.AlbumSaved>(
+          this,
+          Invocation.method(
+            #getSavedAlbums,
+            [index],
+          ),
+        )),
+      ) as _i4.Future<_i2.SpotifyList<_i6.AlbumSaved>>);
 }

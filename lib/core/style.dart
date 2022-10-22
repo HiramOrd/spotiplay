@@ -5,7 +5,7 @@ class Style {
   static const String APP_NAME = "Spotiplay";
 
   //Colors
-  static const Color PRIMARY = Color(0xFF6C46ED);
+  static const Color PRIMARY = Color.fromARGB(255, 237, 70, 81);
   static const Color SECONDARY = Color(0xFFFF6653);
   static const Color THIRD = Color(0xFFE8FF53);
 
@@ -34,7 +34,7 @@ class Style {
 
   static const double ELEVATION = 5;
   static const double SPLASH = LG;
-  static const double RADIUS = XL;
+  static const double RADIUS = XS;
   static const double PADDING = SM;
 
   // Gaps
@@ -50,6 +50,10 @@ class Style {
   );
 
   // Text
+  static const TEXT_SM_WHITE = TextStyle(
+    color: WHITE,
+    fontSize: SM,
+  );
   static const TEXT_SM_GREY600 = TextStyle(
     color: GREY600,
     fontSize: SM,
@@ -124,7 +128,16 @@ class Style {
   static const TEXT_LG_WHITE = TextStyle(
     color: WHITE,
     fontSize: LG,
-    fontWeight: FontWeight.w400,
+  );
+  static const TEXT_LG_WHITE_BOLD = TextStyle(
+    color: WHITE,
+    fontSize: LG,
+    fontWeight: FontWeight.bold,
+  );
+  static const TEXT_XL_WHITE_BOLD = TextStyle(
+    color: WHITE,
+    fontSize: XL,
+    fontWeight: FontWeight.w700,
   );
   static const TEXT_LG_BLACK = TextStyle(
     color: BLACK,
@@ -184,7 +197,7 @@ class Style {
     ),
     dividerColor: GREY600,
     scaffoldBackgroundColor: WHITE,
-
+    textTheme: Typography(platform: TargetPlatform.iOS).white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0,
