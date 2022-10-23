@@ -2,16 +2,19 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/app/core/dio.dart';
+import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/use_cases/auth/login.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  late UcAuthLogin ucLogin;
+  late RepositoryAuth repoAuth;
+  late RepositoryLocal repoLocal;
 
   LoginBloc({
-    required this.ucLogin,
+    required this.repoAuth,
+    required this.repoLocal,
   }) : super(const LoginState.initial()) {
     on<EventLoginRegister>(register);
   }
@@ -20,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
 
     try {
-      final token = await ucLogin.excecute();
+      final token = await UcAuthLogin(repoAuth, repoLocal).excecute();
       DioClient.token = token;
       emit(state.copyWith(status: LoginStatus.authenticated));
     } catch (e) {

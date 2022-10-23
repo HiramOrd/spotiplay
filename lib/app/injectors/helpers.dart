@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/app/helpers/loading.dart';
 
-class InjectionHelpers extends StatelessWidget {
-  const InjectionHelpers({
+class InjectiorHelpers extends StatelessWidget {
+  const InjectiorHelpers({
     Key? key,
     required this.child,
   }) : super(key: key);

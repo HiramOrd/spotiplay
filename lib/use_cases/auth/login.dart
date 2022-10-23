@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:spotiplay/models/exceptions/use_cases.dart';
 import 'package:spotiplay/models/repository/auth.dart';
 import 'package:spotiplay/models/repository/local.dart';
@@ -17,7 +19,7 @@ class UcAuthLogin {
     final token = tokenRx.stringMatch(response);
 
     if (token == null) throw UcNullDataException();
-    print(token);
+    log(token);
     await _repositoryLocal.saveLogin(token);
     return token;
   }

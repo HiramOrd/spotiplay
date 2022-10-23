@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotiplay/app/core/dio.dart';
 import 'package:spotiplay/app/core/environment.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/repository/index.dart';
 import 'package:spotiplay/temp/repository/index.dart';
 
-class InjectionRepository extends StatelessWidget {
-  const InjectionRepository({
+class InjectiorRepository extends StatelessWidget {
+  const InjectiorRepository({
     Key? key,
     required this.child,
   }) : super(key: key);
@@ -44,10 +45,10 @@ class InjectionRepository extends StatelessWidget {
         create: (context) => RepositoryLocalImpl(),
       ),
       RepositoryProvider<RepositoryMusic>(
-        create: (context) => RepositoryMusicImpl(),
+        create: (context) => RepositoryMusicImpl(DioClient().dio),
       ),
       RepositoryProvider<RepositoryArtist>(
-        create: (context) => RepositoryArtistImpl(),
+        create: (context) => RepositoryArtistImpl(DioClient().dio),
       ),
     ];
   }
