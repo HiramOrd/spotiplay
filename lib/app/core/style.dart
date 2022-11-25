@@ -44,6 +44,11 @@ class Style {
   static const EdgeInsets GAP_ALL_LG = EdgeInsets.all(LG);
   static const EdgeInsets GAP_ALL_XL = EdgeInsets.all(XL);
 
+  // Radius
+  static const CIRCLE = BoxDecoration(
+    borderRadius: BorderRadius.all(Radius.circular(100)),
+  );
+
   // Input styles
   static final INPUT_RADIUS = OutlineInputBorder(
     borderRadius: BorderRadius.circular(RADIUS),

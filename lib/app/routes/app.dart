@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../views/index.dart';
+import 'package:spotiplay/app/views/_main/view.dart';
 
 class RoutesApp {
   static const String home = 'home';
@@ -12,7 +12,7 @@ class RoutesApp {
           child: child,
         );
       },
-      pageBuilder: (context, _, __) => const HomeListener(),
+      pageBuilder: (context, _, __) => const MainView(),
     );
   }
 }

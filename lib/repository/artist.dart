@@ -10,15 +10,15 @@ class RepositoryArtistImpl extends RepositoryArtist {
 
   @override
   Future<List<Artist>> getRelatedArtist(String idArtist) async {
-    final data = await dio.get(
-      '/artists/$idArtist/related-artists',
-    );
+    final path = '/artists/$idArtist/related-artists';
 
+    final data = await dio.get(path);
     HelperRepository.isValidResponse(data.statusCode);
     if (data.data['artists'] == null) throw RepositoryNullDataException();
 
-    final albums =
-        (data.data['artists'] as List).map((e) => Artist.fromMap(e)).toList();
+    final albums = (data.data['artists'] as List).map((e) {
+      return Artist.fromMap(e);
+    }).toList();
     return albums;
   }
 }

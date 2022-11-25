@@ -12,15 +12,11 @@ class RepositoryMusicImpl extends RepositoryMusic {
 
   @override
   Future<SpotifyList<Album>> getNewReleases(int index) async {
-    final data = await dio.get(
-      '/browse/new-releases',
-      queryParameters: {
-        "offset": index,
-      },
-    );
+    const path = '/browse/new-releases';
+    final query = {"offset": index};
 
+    final data = await dio.get(path, queryParameters: query);
     HelperRepository.isValidResponse(data.statusCode);
-
     if (data.data['albums'] == null) throw RepositoryNullDataException();
 
     final albums = (data.data['albums']['items'] as List)
@@ -32,19 +28,16 @@ class RepositoryMusicImpl extends RepositoryMusic {
 
   @override
   Future<SpotifyList<AlbumSaved>> getSavedAlbums(int index) async {
-    final data = await dio.get(
-      '/me/albums',
-      queryParameters: {
-        "offset": index,
-      },
-    );
+    const path = '/me/albums';
+    final query = {"offset": index};
 
+    final data = await dio.get(path, queryParameters: query);
     HelperRepository.isValidResponse(data.statusCode);
-
     if (data.data == null) throw RepositoryNullDataException();
 
-    final albums =
-        (data.data['items'] as List).map((e) => AlbumSaved.fromMap(e)).toList();
+    final albums = (data.data['items'] as List).map((e) {
+      return AlbumSaved.fromMap(e);
+    }).toList();
 
     return SpotifyList<AlbumSaved>.fromMap(data.data, albums);
   }

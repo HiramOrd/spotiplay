@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotiplay/app/views/home/bloc/home_bloc.dart';
+import 'package:spotiplay/app/views/_main/home/bloc/home_bloc.dart';
 import 'package:spotiplay/app/widgets/carousel/carousel_album.dart';
 import 'package:spotiplay/models/album.dart';
 

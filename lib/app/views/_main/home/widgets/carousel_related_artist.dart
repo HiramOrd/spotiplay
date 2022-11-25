@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotiplay/app/helpers/string.dart';
-import 'package:spotiplay/app/views/home/bloc/home_bloc.dart';
+import 'package:spotiplay/app/views/_main/home/bloc/home_bloc.dart';
 import 'package:spotiplay/app/widgets/aspect_ratio_builder.dart';
 import 'package:spotiplay/app/widgets/image_button.dart';
 import 'package:spotiplay/app/core/style.dart';

@@ -22,3 +22,20 @@ class RepositoryLocalImpl extends RepositoryLocal {
     await prefs.remove('token');
   }
 }
+
+// {
+//     "display_name": "hiram_ord.",
+//     "email": "hiram8012@gmail.com",
+//     "external_urls": {
+//         "spotify": "https://open.spotify.com/user/hiram_ord."
+//     },
+//     "followers": {
+//         "href": null,
+//         "total": 0
+//     },
+//     "href": "https://api.spotify.com/v1/users/hiram_ord.",
+//     "id": "hiram_ord.",
+//     "images": [],
+//     "type": "user",
+//     "uri": "spotify:user:hiram_ord."
+// }

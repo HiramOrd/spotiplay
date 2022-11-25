@@ -33,6 +33,9 @@ class InjectiorBlocs extends StatelessWidget {
             repoMusic: context.read<RepositoryMusic>(),
           ),
         ),
+        BlocProvider(
+          create: (context) => OptionsBloc(),
+        ),
       ],
       child: child,
     );
