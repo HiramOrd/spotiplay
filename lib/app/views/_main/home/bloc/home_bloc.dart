@@ -1,16 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotiplay/app/core/dio.dart';
 import 'package:spotiplay/app/helpers/error.dart';
+import 'package:spotiplay/helpers/auth.dart';
+import 'package:spotiplay/helpers/spotify_list.dart';
 import 'package:spotiplay/models/album.dart';
 import 'package:spotiplay/models/artist.dart';
 import 'package:spotiplay/models/repository/index.dart';
 import 'package:spotiplay/models/spotify_list.dart';
 import 'package:spotiplay/models/album_saved.dart';
 import 'package:spotiplay/use_cases/album/index.dart';
-import 'package:spotiplay/use_cases/artist/get_related_artist.dart';
-import 'package:spotiplay/use_cases/auth/index.dart';
-import 'package:collection/collection.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -35,20 +33,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(state.copyWith(status: HomeStatus.loading));
 
-      final newReleases = await UcAlbumGetNewReleases(repoMusic).execute();
-      final savedAlbums = await UcAlbumGetSavedAlbums(repoMusic).execute();
+      final newReleases = await repoMusic.getNewReleases(0);
+      final savedAlbums = await repoMusic.getSavedAlbums(0);
 
-      // Get one saved album artist
-      final firstSavedAlbum = savedAlbums?.items?.firstOrNull?.album;
-      final firstArtist = firstSavedAlbum?.artists?.firstOrNull?.id;
+      final firstArtist = UcAlbumGetFirstArtist.execute(savedAlbums);
+      final hasFirstArtist = firstArtist?.isNotEmpty == true;
 
-      // Get related artist
-      List<Artist>? relatedArtist;
-      if (firstArtist?.isNotEmpty == true) {
-        relatedArtist = await UcArtistGetRelatedArtist(repoArtist).execute(
-          firstArtist!,
-        );
-      }
+      List<Artist>? relatedArtist = hasFirstArtist
+          ? await repoArtist.getRelatedArtist(firstArtist!)
+          : null;
 
       emit(state.copyWith(
         status: HomeStatus.initial,
@@ -64,12 +57,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   updateSavedAlbums(EventHomeUpdateSavedAlbums event, emit) async {
     try {
-      final savedAlbums = await UcAlbumGetSavedAlbums(repoMusic).execute(
-        paginationIndex: event.index,
-        prevAlbumsSaved: state.savedAlbums,
+      final newSavedAlbums = await repoMusic.getSavedAlbums(event.index);
+
+      final nextAlbumsSaved = HelperSpotifyList.merge<AlbumSaved>(
+        prevList: state.savedAlbums!,
+        newList: newSavedAlbums,
       );
 
-      emit(state.copyWith(savedAlbums: savedAlbums));
+      emit(state.copyWith(savedAlbums: nextAlbumsSaved));
     } catch (e, s) {
       HelperError.show(e, s);
       add(EventHomeLogout());
@@ -78,12 +73,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   updateNewReleases(EventHomeUpdateNewReleases event, emit) async {
     try {
-      final newReleases = await UcAlbumGetNewReleases(repoMusic).execute(
-        paginationIndex: event.index,
-        prevNewReleases: state.newReleases,
+      final newReleases = await repoMusic.getNewReleases(event.index);
+
+      final nextReleases = HelperSpotifyList.merge<Album>(
+        prevList: state.newReleases!,
+        newList: newReleases,
       );
 
-      emit(state.copyWith(newReleases: newReleases));
+      emit(state.copyWith(newReleases: nextReleases));
     } catch (e, s) {
       HelperError.show(e, s);
       add(EventHomeLogout());
@@ -92,8 +89,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   logout(EventHomeLogout event, emit) async {
     try {
-      await UcAuthLogout(repoLocal).execute();
-      DioClient.token = null;
+      await HelperAuth.logout(repoLocal);
 
       emit(state.copyWith(status: HomeStatus.logout));
     } catch (e) {

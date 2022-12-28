@@ -20,7 +20,7 @@ class CarouselNewReleases extends StatelessWidget {
       carouselUpdate: () {
         final homeBloc = context.read<HomeBloc>();
         final index = state.newReleases?.items?.length;
-        homeBloc.add(EventHomeUpdateNewReleases(index: index));
+        homeBloc.add(EventHomeUpdateNewReleases(index: index!));
       },
       albumOnTap: () {},
     );

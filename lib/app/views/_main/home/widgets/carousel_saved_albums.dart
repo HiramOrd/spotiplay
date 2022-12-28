@@ -20,7 +20,7 @@ class CarouselSavedAlbums extends StatelessWidget {
       carouselUpdate: () {
         final homeBloc = context.read<HomeBloc>();
         final index = state.savedAlbums?.items?.length;
-        homeBloc.add(EventHomeUpdateSavedAlbums(index: index));
+        homeBloc.add(EventHomeUpdateSavedAlbums(index: index!));
       },
       albumOnTap: () {},
     );

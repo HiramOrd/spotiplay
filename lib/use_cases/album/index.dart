@@ -1,2 +1,1 @@
-export 'get_new_releases.dart';
-export 'get_saved_albums.dart';
+export 'get_first_artist.dart';

@@ -5,12 +5,12 @@ class HomeEvent {}
 class EventHomeInit extends HomeEvent {}
 
 class EventHomeUpdateSavedAlbums extends HomeEvent {
-  final int? index;
+  final int index;
   EventHomeUpdateSavedAlbums({required this.index});
 }
 
 class EventHomeUpdateNewReleases extends HomeEvent {
-  final int? index;
+  final int index;
   EventHomeUpdateNewReleases({required this.index});
 }
 

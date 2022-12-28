@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotiplay/helpers/auth.dart';
 import 'package:spotiplay/models/repository/index.dart';
-import 'package:spotiplay/use_cases/auth/validate_token.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -17,7 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   validateToken(EventSplashValidateToken event, emit) async {
     try {
-      final hasToken = await UcAuthValidateToken(repoLocal).execute();
+      final hasToken = await HelperAuth.validateToken(repoLocal);
 
       emit(
         state.copyWith(
